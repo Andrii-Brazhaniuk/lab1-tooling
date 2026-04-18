@@ -1,0 +1,18 @@
+# Бінарні файли (результат збірки)
+bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Тимчасові файли Go
+/vendor/
+obj/
+
+# Конфігурації IDE (VS Code)
+.vscode/
+
+# Файли операційної системи
+.DS_Store
+Thumbs.db
