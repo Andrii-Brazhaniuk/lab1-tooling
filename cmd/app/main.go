@@ -1,10 +1,10 @@
 package main
 
 import (
-	"net/http"
-	_ "net/http/pprof"
 	"github.com/Andrii-Brazhaniuk/lab1-tooling/internal"
 	"github.com/rs/zerolog/log"
+	"net/http"
+	_ "net/http/pprof"
 )
 
 func main() {
