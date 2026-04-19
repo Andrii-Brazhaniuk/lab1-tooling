@@ -1,0 +1,4 @@
+# Кожен, хто змінює код у папці internal, має отримати добро выд мене
+/internal/  @Andrii-Brazhaniuk
+# Відповідальний за конфігурації GitHub Actions
+/.github/workflows/ @Andrii-Brazhaniuk
