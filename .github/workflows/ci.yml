@@ -1,0 +1,38 @@
+name: CI
+
+# Конвеєр запускається при push або PR у гілку main
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Отримання коду
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Встановлення Go (версія має збігатися з твоєю в go.mod)
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.26.x'
+          cache: true # автоматичне кешування залежностей
+
+      # 3. Перевірка цілісності залежностей
+      - name: Verify Dependencies
+        run: go mod verify
+
+      # 4. Запуск лінтера (офіційний action швидший за ручний запуск)
+      - name: Lint
+        uses: golangci/golangci-lint-action@v4
+        with:
+          version: latest
+
+      # 5. Запуск тестів через твій Makefile
+      - name: Test
+        run: make test

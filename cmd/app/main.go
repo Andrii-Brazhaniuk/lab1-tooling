@@ -1,17 +1,30 @@
 package main
+
 import (
-    "fmt"
-    "github.com/Andrii-Brazhaniuk/lab1-tooling/internal"
+	"net/http"
+	_ "net/http/pprof"
+	"github.com/Andrii-Brazhaniuk/lab1-tooling/internal"
+	"github.com/rs/zerolog/log"
 )
 
 func main() {
-    sum := internal.Add(40, 2)
-    fmt.Printf("Sum: %d\n", sum)
+	go func() {
+		log.Info().Msg("Діагностичний сервер pprof запущено на http://localhost:6060")
+		if err := http.ListenAndServe("localhost:6060", nil); err != nil {
+			log.Error().Err(err).Msg("pprof сервер не зміг запуститися")
+		}
+	}()
 
-    div, err := internal.Divide(10, 2)
-    if err != nil {
-        fmt.Printf("Error: %v\n", err)
-    } else {
-        fmt.Printf("Division: %d\n", div)
-    }
+	// Дані для обробки
+	testData := []string{"apple", "123", "banana", "Cherry", "go", "golang", "100", "test"}
+
+	// Запускаємо нескінченний цикл з "повільною" функцією в горутині
+	go func() {
+		log.Info().Msg("Запущено навантаження на CPU (Slow Mode)...")
+		for {
+			internal.ProcessDataSlow(testData)
+		}
+	}()
+
+	select {}
 }
