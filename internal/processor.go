@@ -1,19 +1,15 @@
 package internal
-
 import (
 	"time"
 	"github.com/rs/zerolog/log" 
 )
-
 // Глобальна змінна, яка "з'їдає" пам'ять 
 var metadataCache []string
-
 func StartProcessing() {
 	// Імітація обробки запитів
 	go func() {
 		ticker := time.NewTicker(10 * time.Millisecond)
 		defer ticker.Stop() 
-
 		for range ticker.C {
 			// Створюємо важкі дані 
 			data := make([]byte, 102400)
