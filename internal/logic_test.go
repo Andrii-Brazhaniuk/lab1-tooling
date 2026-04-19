@@ -1,4 +1,5 @@
 package internal
+
 import "testing"
 
 func TestAdd(t *testing.T) {
@@ -25,10 +26,10 @@ func TestAdd(t *testing.T) {
 
 func TestDivide(t *testing.T) {
 	tests := []struct {
-		name      string
-		a, b      int
-		want      int
-		wantErr   bool
+		name    string
+		a, b    int
+		want    int
+		wantErr bool
 	}{
 		{"valid division", 10, 2, 5, false},
 		{"division by zero", 10, 0, 0, true},
